@@ -114,7 +114,13 @@ func defineTable(constants []string, tableName string) Table {
 			bytes = append(bytes, byte(v>>16))
 			bytes = append(bytes, byte(v>>24))
 		} else if strings.Contains(line, ".quad") {
-			v, err := strconv.ParseInt(strings.Fields(line)[1][2:], 16, 64)
+			var v int64
+			var err error
+			if len(strings.Fields(line)[1]) > 1 && strings.EqualFold(strings.Fields(line)[1][:2], "0x") {
+				v, err = strconv.ParseInt(strings.Fields(line)[1][2:], 16, 64)
+			} else {
+				v, err = strconv.ParseInt(strings.Fields(line)[1], 10, 64)
+			}
 			if err != nil {
 				panic(fmt.Sprintf("Atoi error for .quad: %v", err))
 			}
