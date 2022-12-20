@@ -151,7 +151,7 @@ func writeGoasmBody(sub Subroutine, stack Stack, stackArgs StackArgs, arguments,
 
 		line = fixRbpPlusLoad(line, stackArgs, stack)
 
-		detectRbpMinusMemoryAccess(line)
+		// detectRbpMinusMemoryAccess(line)
 		detectJumpTable(line)
 		detectPushInstruction(line)
 		detectPopInstruction(line)
@@ -379,13 +379,13 @@ func fixRbpPlusLoad(line string, stackArgs StackArgs, stack Stack) string {
 }
 
 // Detect memory accesses in the form of '[rbp - constant]'
-func detectRbpMinusMemoryAccess(line string) {
+// func detectRbpMinusMemoryAccess(line string) {
 
-	if match := regexpRbpLoadLower.FindStringSubmatch(line); len(match) > 1 {
+// 	if match := regexpRbpLoadLower.FindStringSubmatch(line); len(match) > 1 {
 
-		panic(fmt.Sprintf("Not expected to find [rbp -] based loads: %s\n\nDid you specify `-mno-red-zone`?\n\n", line))
-	}
-}
+// 		panic(fmt.Sprintf("Not expected to find [rbp -] based loads: %s\n\nDid you specify `-mno-red-zone`?\n\n", line))
+// 	}
+// }
 
 // Detect jump tables
 func detectJumpTable(line string) {
