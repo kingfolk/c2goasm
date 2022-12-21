@@ -116,13 +116,11 @@ func defineTable(constants []string, tableName string) Table {
 		} else if strings.Contains(line, ".quad") {
 			var v int64
 			var err error
-			fmt.Println("<<< strings.Fields(line)[1]", strings.Fields(line)[1])
 			if strings.Index(strings.Fields(line)[1], "0x") == 0 {
 				v, err = strconv.ParseInt(strings.Fields(line)[1][2:], 16, 64)
 			} else {
 				v, err = strconv.ParseInt(strings.Fields(line)[1], 10, 64)
 			}
-			fmt.Println("  <<< v, err", v, err)
 			if err != nil {
 				panic(fmt.Sprintf("Atoi error for .quad: %v", err))
 			}
