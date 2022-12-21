@@ -236,8 +236,6 @@ func compactOpcodes(file string) {
 }
 
 func main() {
-	fmt.Println("---- start c2goasm ----")
-
 	flag.Parse()
 
 	if flag.NArg() < 2 {
