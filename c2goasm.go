@@ -275,7 +275,8 @@ func main() {
 	if *assembleFlag {
 		fmt.Println("Invoking asm2plan9s on", assemblyFile)
 		cmd := exec.Command("asm2plan9s", assemblyFile)
-		_, err := cmd.CombinedOutput()
+		out, err := cmd.CombinedOutput()
+		fmt.Println(string(out))
 		if err != nil {
 			log.Fatalf("asm2plan9s: %v", err)
 		}
