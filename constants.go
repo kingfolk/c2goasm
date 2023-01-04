@@ -239,7 +239,7 @@ func segmentConstTables(lines []string) []Table {
 	tables := []Table{}
 
 	for _, c := range consts {
-
+		fmt.Println("<<< lines[c.start:c.end]", lines[c.start:c.end])
 		tables = append(tables, defineTable(lines[c.start:c.end], c.name))
 	}
 
