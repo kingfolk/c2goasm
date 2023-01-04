@@ -272,6 +272,8 @@ func main() {
 		log.Fatalf("writeLines: %s", err)
 	}
 
+	fmt.Println("<<< before asm2plan9s result", result[:50])
+
 	if *assembleFlag {
 		fmt.Println("Invoking asm2plan9s on", assemblyFile)
 		cmd := exec.Command("asm2plan9s", assemblyFile)
