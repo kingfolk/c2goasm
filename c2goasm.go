@@ -81,6 +81,8 @@ func process(assembly []string, goCompanionFile string) ([]string, error) {
 
 	var result []string
 
+	var logged bool
+
 	// Iterate over all subroutines
 	for isubroutine, sub := range subroutines {
 
@@ -106,10 +108,18 @@ func process(assembly []string, goCompanionFile string) ([]string, error) {
 		// Write header for subroutine in go assembly
 		result = append(result, writeGoasmPrologue(sub, stack, golangArgs, golangReturns)...)
 
+		if !logged {
+			fmt.Println("<<< subroutine before", sub.body)
+		}
+
 		// Write body of code
 		assembly, err := writeGoasmBody(sub, stack, stackArgs, golangArgs, golangReturns)
 		if err != nil {
 			panic(fmt.Sprintf("writeGoasmBody: %v", err))
+		}
+		if !logged {
+			fmt.Println("<<< subroutine after", assembly)
+			logged = true
 		}
 		result = append(result, assembly...)
 
@@ -271,8 +281,6 @@ func main() {
 	if err != nil {
 		log.Fatalf("writeLines: %s", err)
 	}
-
-	fmt.Println("<<< before asm2plan9s result", result[:50])
 
 	if *assembleFlag {
 		fmt.Println("Invoking asm2plan9s on", assemblyFile)
