@@ -136,7 +136,7 @@ func writeGoasmBody(sub Subroutine, stack Stack, stackArgs StackArgs, arguments,
 			line = "                                 // " + strings.TrimSpace(line)
 		}
 
-		line = removeUndefined(line, "ptr")
+		// line = removeUndefined(line, "ptr")
 		line = removeUndefined(line, "# NOREX")
 
 		// https://github.com/vertis/objconv/blob/master/src/disasm2.cpp
